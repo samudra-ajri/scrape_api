@@ -65,9 +65,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-# ITEM_PIPELINES = {
-#    'scrape_api.pipelines.ScrapeApiPipeline': 300,
-# }
+ITEM_PIPELINES = {
+   'scrape_api.pipelines.MongodbPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -93,3 +93,7 @@ ROBOTSTXT_OBEY = False
 # Yotube configuration
 YOUTUBE_API_KEY=config('YOUTUBE_API_KEY')
 YOUTUBE_CHANNEL_ID_VLIC=config('YOUTUBE_CHANNEL_ID_VLIC')
+
+# MongoDB configuration
+MONGO_URI=config('MONGO_URI')
+MONGO_DATABASE=config('MONGO_DATABASE')
