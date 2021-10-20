@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from decouple import config
 
 # Scrapy settings for scrape_api project
 #
@@ -64,9 +65,9 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
+# ITEM_PIPELINES = {
 #    'scrape_api.pipelines.ScrapeApiPipeline': 300,
-#}
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +89,7 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# Yotube configuration
+YOUTUBE_API_KEY=config('YOUTUBE_API_KEY')
+YOUTUBE_CHANNEL_ID_VLIC=config('YOUTUBE_CHANNEL_ID_VLIC')
