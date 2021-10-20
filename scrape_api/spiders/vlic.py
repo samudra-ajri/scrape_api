@@ -5,7 +5,7 @@ from scrapy.utils.project import get_project_settings
 
 
 class VlicSpider(scrapy.Spider):
-    global part, channel_id, max_results, key
+    global key, channel_id
     settings = get_project_settings()
     
     name = 'vlic'
@@ -14,7 +14,7 @@ class VlicSpider(scrapy.Spider):
     key = settings.get('YOUTUBE_API_KEY')
     channel_id = settings.get('YOUTUBE_CHANNEL_ID_VLIC')
     
-    start_urls = [f'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelId={channel_id}&key={key}']
+    start_urls = [f'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&type=video&channelId={channel_id}&key={key}']
 
     def parse(self, response):
         resp = json.loads(response.body)
@@ -32,6 +32,6 @@ class VlicSpider(scrapy.Spider):
         next_page = resp.get('nextPageToken')
         if next_page:
             yield scrapy.Request(
-                url=f'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&channelId={channel_id}&pageToken={next_page}&key={key}',
+                url=f'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=50&type=video&channelId={channel_id}&pageToken={next_page}&key={key}',
                 callback=self.parse
             )
