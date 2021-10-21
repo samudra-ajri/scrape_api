@@ -1,7 +1,7 @@
 # Scrape API 
 
 ## Overview
-This service will scraping the youtube api with specific channel id (VLIC Corpu channel in this example).
+This service will scrape the youtube api with specific channel id (VLIC Corpu channel in this example).
 
 ## Stack Architechture
 1. Python 3.7
