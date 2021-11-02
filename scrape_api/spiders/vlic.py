@@ -25,8 +25,8 @@ class VlicSpider(scrapy.Spider):
                 'description': item.get('snippet').get('description').replace('...',''),
                 'url': f'https://www.youtube.com/watch?v={item.get("id").get("videoId")}',
                 'img_url': item.get('snippet').get('thumbnails').get('medium').get('url'),
-                'content-type': 'vlic',
-                'published-date': item.get('snippet').get('publishTime'),
+                'content_type': 'vlic',
+                'published_date': item.get('snippet').get('publishTime'),
                 'elastic': 0
             }
         
