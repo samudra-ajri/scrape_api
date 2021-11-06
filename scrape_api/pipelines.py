@@ -32,12 +32,12 @@ class MongodbPipeline(object):
 class DuplicatesPipeline(object):
 
     def __init__(self):
-        self.ids_seen = set()
+        self.urls_seen = set()
 
     def process_item(self, item, spider):
-        if item['url'] in self.ids_seen:
+        if item['url'] in self.urls_seen:
             raise DropItem("Duplicate item found: %s" % item)
         else:
-            self.ids_seen.add(item['url'])
+            self.urls_seen.add(item['url'])
             return item
 
