@@ -28,24 +28,40 @@ class DigilearnArticleSpider(scrapy.Spider):
     def parse(self, response):
         resp = json.loads(response.body)
         items = resp.get('data').get('results')
+        sites = []
         for item in items:
-            yield {
-                'title': item.get('title'),
-                'description': re.sub(CLEANR, '', item.get('description')) if item.get('description') else item.get('title'),
-                'url': f'https://www.mydigilearn.id/article/{item.get("id")}/{item.get("slug")}',
-                'img_url': item.get('picture'),
-                'content_type': 'digilearn',
-                'published_date': item.get('created_at') if item.get('created_at') else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                'elastic': 0
-            }
+            url = f'https://service.mydigilearn.id/v2/articles/{item.get("id")}'
+            sites.append(url)
+        
+        for site in sites:
+            yield scrapy.Request(
+                url=site,
+                callback=self.parse_2,
+                headers={
+                    'Authorization': auth
+                }
+            )
 
         next_page = resp.get('data').get('pagination').get('next')
         total_pages = resp.get('data').get('pagination').get('total_pages')
         if next_page <= total_pages:
             yield scrapy.Request(
-                url=f'https://service.mydigilearn.id/v2/videos/list?perpage=50&page={next_page}',
+                url=f'https://service.mydigilearn.id/v2/articles/list?perpage=50&page={next_page}',
                 callback=self.parse,
                 headers={
                     'Authorization': auth
                 }
             )
+
+    def parse_2(self, response):
+        resp = json.loads(response.body)
+        item = resp.get('data')
+        yield {
+            'title': item.get('title'),
+            'description': re.sub(CLEANR, '', item.get('content')) if item.get('content') else item.get('title'),
+            'url': f'https://www.mydigilearn.id/article/{item.get("id")}/{item.get("slug")}',
+            'img_url': item.get('picture'),
+            'content_type': 'digilearn',
+            'published_date': item.get('created_at') if item.get('created_at') else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            'elastic': 0
+        }

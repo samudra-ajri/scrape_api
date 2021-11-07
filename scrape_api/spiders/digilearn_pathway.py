@@ -28,17 +28,20 @@ class DigilearnPathwaySpider(scrapy.Spider):
     def parse(self, response):
         resp = json.loads(response.body)
         items = resp.get('result').get('datas')
+        sites = []
         for item in items:
-            yield {
-                'title': item.get('title'),
-                'description': re.sub(CLEANR, '', item.get('description')) if item.get('description') else item.get('title'),
-                'url': f'https://www.mydigilearn.id/pathway/{item.get("id")}',
-                'img_url': item.get('image_desktop'),
-                'content_type': 'digilearn',
-                'published_date': item.get('start_at') if item.get('start_at') else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-                'elastic': 0
-            }
-    
+            url = f'https://service.mydigilearn.id/pathway/{item.get("id")}'
+            sites.append(url)
+        
+        for site in sites:
+            yield scrapy.Request(
+                url=site,
+                callback=self.parse_2,
+                headers={
+                    'Authorization': auth
+                }
+            )
+
         current_page = resp.get('result').get('pagination').get('page')
         next_page = current_page + 1
         total_items = resp.get('result').get('pagination').get('totalItems')
@@ -51,3 +54,16 @@ class DigilearnPathwaySpider(scrapy.Spider):
                     'Authorization': auth
                 }
             )
+    
+    def parse_2(self, response):
+        resp = json.loads(response.body)
+        item = resp.get('result').get('detail')
+        yield {
+            'title': item.get('title'),
+            'description': re.sub(CLEANR, '', item.get('description')) if item.get('description') else item.get('title'),
+            'url': f'https://www.mydigilearn.id/pathway/{item.get("id")}',
+            'img_url': item.get('image_desktop'),
+            'content_type': 'digilearn',
+            'published_date': item.get('created_at') if item.get('created_at') else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+            'elastic': 0
+        }
