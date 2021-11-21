@@ -6,6 +6,7 @@ from scrapy.utils.project import get_project_settings
 from scrapy.selector import Selector
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
+from datetime import datetime
 
 
 class InnovationdaySpider(scrapy.Spider):

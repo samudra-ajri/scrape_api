@@ -2,6 +2,7 @@
 import scrapy
 import json
 from scrapy.utils.project import get_project_settings
+from datetime import datetime
 
 
 class VlicSpider(scrapy.Spider):
