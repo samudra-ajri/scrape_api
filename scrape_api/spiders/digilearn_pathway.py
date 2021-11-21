@@ -65,5 +65,6 @@ class DigilearnPathwaySpider(scrapy.Spider):
             'img_url': item.get('image_desktop'),
             'content_type': 'digilearn',
             'published_date': item.get('created_at') if item.get('created_at') else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-            'elastic': 0
+            'elastic': 0,
+            'created_at': datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         }

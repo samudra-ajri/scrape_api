@@ -27,7 +27,8 @@ class VlicSpider(scrapy.Spider):
                 'img_url': item.get('snippet').get('thumbnails').get('medium').get('url'),
                 'content_type': 'vlic',
                 'published_date': item.get('snippet').get('publishTime'),
-                'elastic': 0
+                'elastic': 0,
+                'created_at': datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
             }
         
         next_page = resp.get('nextPageToken')

@@ -60,5 +60,6 @@ class InnovationdaySpider(scrapy.Spider):
             'img_url': '',
             'content_type': 'innovationday',
             'published_date': published_date if published_date else datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
-            'elastic': 0
+            'elastic': 0,
+            'created_at': datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         }
