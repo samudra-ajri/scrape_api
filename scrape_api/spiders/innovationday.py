@@ -74,6 +74,4 @@ class InnovationdaySpider(scrapy.Spider):
             published_date = published_date.replace(d1[i], str(i+1))
 
         datetime_object = datetime.strptime(published_date, '%d-%m-%Y').strftime('%Y-%m-%dT%H:%M:%SZ')
-
-
         return datetime_object
