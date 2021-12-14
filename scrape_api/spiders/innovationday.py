@@ -52,7 +52,8 @@ class InnovationdaySpider(scrapy.Spider):
     def parse_2(self, response):
         title = response.xpath("//div[@data-id='3a1ee1f3']/div/h2/text()").get()
         description = " ".join(response.xpath("//div[@data-id='7b7e3a60']/div/h2/text()").getall())
-        published_date = response.xpath("//div[@data-id='590e1761']/div/h2/text()").get().split(' | ')[0]
+        raw_date = response.xpath("//div[@data-id='590e1761']/div/h2/text()").get().split(' | ')[0]
+        published_date = self.datetime_casting(raw_date)
 
         yield {
             'title': title.strip() if title else response.request.url,
@@ -64,3 +65,15 @@ class InnovationdaySpider(scrapy.Spider):
             'elastic': 0,
             'created_at': datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
         }
+    
+    def datetime_casting(self, raw_date):
+        d1 = ['januari','februari','maret','april','mei','juni','juli','agustus','september','oktober','november','desember']
+
+        published_date = (raw_date.lower().split(' ', 1)[1]).replace(' ','-')
+        for i in range(len(d1)):
+            published_date = published_date.replace(d1[i], str(i+1))
+
+        datetime_object = datetime.strptime(published_date, '%d-%m-%Y').strftime('%Y-%m-%dT%H:%M:%SZ')
+
+
+        return datetime_object
