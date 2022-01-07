@@ -106,3 +106,6 @@ TELKOMDIGITAL_UID=config('TELKOMDIGITAL_UID')
 # MongoDB configuration
 MONGO_URI=config('MONGO_URI')
 MONGO_DATABASE=config('MONGO_DATABASE')
+
+# Tanyaaja configuration
+TANYAAJA_AUTH_HEADER=config('TANYAAJA_AUTH_HEADER')
