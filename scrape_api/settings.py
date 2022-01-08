@@ -109,3 +109,6 @@ MONGO_DATABASE=config('MONGO_DATABASE')
 
 # Tanyaaja configuration
 TANYAAJA_AUTH_HEADER=config('TANYAAJA_AUTH_HEADER')
+
+# Digitallearning configuration
+DIGITALLEARNING_SESSION=config('DIGITALLEARNING_SESSION')
