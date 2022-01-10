@@ -112,3 +112,6 @@ TANYAAJA_AUTH_HEADER=config('TANYAAJA_AUTH_HEADER')
 
 # Digitallearning configuration
 DIGITALLEARNING_SESSION=config('DIGITALLEARNING_SESSION')
+
+# Hcwiki configuration
+HCWIKI_SESSION=config('HCWIKI_SESSION')
