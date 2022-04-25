@@ -36,7 +36,7 @@ for example: $ scrapy crawl vlic.py
 ### Stored data checking
 Open your favorite mongodb client, then check your mongo_uri.
 
-### Next development steps
+## Next development steps
 1. Add spiders paramenters
 2. Deploying spiders
 3. Executes spiders periodically (cron job)
