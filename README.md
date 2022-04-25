@@ -20,6 +20,7 @@ $ cd scrape_api
 Copy the config file and adjust the needs
 ```
 $ copy .env-example .env
+fill the .env with your needs
 ```
 Install the dependencies:
 ```
