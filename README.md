@@ -21,9 +21,15 @@ Copy the config file and adjust the needs
 ```
 $ copy .env-example .env
 ```
-Run the service:
+Install the dependencies:
 ```
-$ scrapy crawl vlic
+$ pip install -r requirements.txt
+```
+Run the service/spiders:
+```
+$ cd scrape_api
+$ scrapy crawl <spider_name>
+for example: $ scrapy crawl vlic.py
 ```
 
 ### Stored data checking
