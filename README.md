@@ -13,7 +13,7 @@ Clone the repository
 ```
 $ git clone git@github.com:samudra-ajri/scrape_api.git
 ```
-Enter into the `scrape_api` directory, then install the dependencies
+Enter into the `scrape_api` directory
 ```
 $ cd scrape_api
 ```
