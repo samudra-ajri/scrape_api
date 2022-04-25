@@ -1,7 +1,7 @@
 # Scrape API 
 
 ## Overview
-This service will scrape the youtube api with specific channel id (VLIC Corpu channel in this example).
+This service will scrape the various websites pages.
 
 ## Stack Architechture
 1. Python 3.7
@@ -35,3 +35,9 @@ for example: $ scrapy crawl vlic.py
 
 ### Stored data checking
 Open your favorite mongodb client, then check your mongo_uri.
+
+### Next development steps
+1. Add spiders paramenters
+2. Deploying spiders
+3. Executes spiders periodically (cron job)
+4. Add spiders monitoring
